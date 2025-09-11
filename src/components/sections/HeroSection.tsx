@@ -1,7 +1,7 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button as CTAButton } from "@/components/ui/button-custom";
 import { Button as UIButton } from "@/components/ui/button";
-import { Github, Linkedin, Mail, MessageCircle, Send } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const SOCIAL_LINKS = {
   contact: "#contact", // Update to your contact section or mailto link
@@ -24,7 +24,7 @@ export default function HeroSection() {
             {/* Greeting pill */}
             <div className="inline-flex items-center gap-2 rounded-full border bg-background/70 px-4 py-1 text-xs text-foreground/80 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/50">
               <span className="size-1.5 rounded-full bg-emerald-500" />
-              Hello, I'm
+              Hello, I&apos;m
             </div>
 
             {/* Name */}
