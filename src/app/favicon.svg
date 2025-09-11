@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">GK round icon with border</title>
+
+  <!-- white circular border -->
+  <circle cx="256" cy="256" r="246" fill="black" stroke="white" stroke-width="20"/>
+
+  <!-- white centered text -->
+  <text x="50%" y="50%"
+        text-anchor="middle" dominant-baseline="central"
+        font-family="Arial, Helvetica, sans-serif"
+        font-weight="700" font-size="200"
+        fill="#ffffff">GK</text>
+</svg>
