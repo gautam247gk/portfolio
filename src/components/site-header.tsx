@@ -5,13 +5,14 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Logo } from "./ui/logo";
 import { Button } from "./ui/button-custom";
-import { Menu as MenuIcon, X as XIcon } from "lucide-react";
+import { Menu as MenuIcon } from "lucide-react";
 import { Sheet, SheetTrigger, SheetContent, SheetClose } from "./ui/sheet";
 
 const nav = [
   { id: "home", label: "Home" },
   { id: "aboutMe", label: "About Me" },
   { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -99,7 +100,7 @@ export function SiteHeader() {
             <div className="hidden items-center gap-2 text-sm font-medium md:flex">
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-secondary bg-background text-foreground hover:bg-secondary hover:text-white h-10 px-4 py-2 min-w-[81px]"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-secondary bg-background text-foreground hover:bg-secondary/50 hover:text-secondary-foreground h-10 px-4 py-2 min-w-[81px]"
               >
                 Resume
               </Link>
@@ -136,7 +137,10 @@ export function SiteHeader() {
                       );
                     })}
                     <div className="mt-4 flex flex-col gap-2">
-                      <Button variant="secondary" className="bg-white py-2">
+                      <Button
+                        variant="secondary"
+                        className="bg-white py-2 rounded-full"
+                      >
                         <a href="/login">Resume</a>
                       </Button>
                     </div>

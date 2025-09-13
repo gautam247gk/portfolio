@@ -1,17 +1,54 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import React from "react";
+import {
+  motion,
+  useReducedMotion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import React, { useEffect } from "react";
 
 export default function AnimatedBackground() {
   const reduce = useReducedMotion();
+
+  // Mouse-based parallax (does not place elements under the cursor)
+  const mx = useMotionValue(0); // normalized -1..1
+  const my = useMotionValue(0);
+  const smx = useSpring(mx, { stiffness: 120, damping: 18, mass: 0.25 });
+  const smy = useSpring(my, { stiffness: 120, damping: 18, mass: 0.25 });
+
+  useEffect(() => {
+    if (reduce) return; // respect prefers-reduced-motion
+    const onMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1; // -1..1
+      const y = (e.clientY / window.innerHeight) * 2 - 1; // -1..1
+      // Parallax: move opposite to cursor slightly (not directly under pointer)
+      mx.set(x);
+      my.set(y);
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [reduce, mx, my]);
+
+  // Parallax mappings (deeper layers move less)
+  const blob1X = useTransform(smx, [-1, 1], [-60, 60]);
+  const blob1Y = useTransform(smy, [-1, 1], [40, -40]);
+  const blob2X = useTransform(smx, [-1, 1], [40, -40]);
+  const blob2Y = useTransform(smy, [-1, 1], [-35, 35]);
+  const blob3X = useTransform(smx, [-1, 1], [-30, 30]);
+  const blob3Y = useTransform(smy, [-1, 1], [25, -25]);
+  const floater1X = useTransform(smx, [-1, 1], [26, -26]);
+  const floater1Y = useTransform(smy, [-1, 1], [-18, 18]);
+  const floater2X = useTransform(smx, [-1, 1], [-20, 20]);
+  const floater2Y = useTransform(smy, [-1, 1], [16, -16]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Soft vertical base gradient (updated palette) */}
       <div className="absolute inset-0 bg-gradient-to-b from-violet-50 via-white to-emerald-50" />
 
-      {/* Subtle grid with a vignette fade + gentle parallax */}
+      {/* Subtle grid with a vignette fade (static) */}
       <motion.div
         aria-hidden
         className="absolute inset-0 bg-grid opacity-50"
@@ -21,9 +58,6 @@ export default function AnimatedBackground() {
           maskImage:
             "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 40%, transparent 70%)",
         }}
-        initial={{ x: 0, y: 0 }}
-        animate={{ x: [0, 8, -6, 0], y: [0, -6, 8, 0] }}
-        transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Aurora gradient wash (rotates very slowly) */}
@@ -50,54 +84,28 @@ export default function AnimatedBackground() {
           <motion.div
             aria-hidden
             className="absolute -top-40 -left-40 h-[60vmax] w-[60vmax] rounded-full bg-emerald-400/30 blur-3xl mix-blend-multiply"
-            initial={{ x: -120, y: -100, scale: 1 }}
-            animate={{
-              x: [-120, 100, -80, -120],
-              y: [-100, 60, -40, -100],
-              scale: [1, 1.12, 0.92, 1],
-            }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            style={{ x: blob1X, y: blob1Y }}
           />
           <motion.div
             aria-hidden
             className="absolute -bottom-48 -right-24 h-[50vmax] w-[50vmax] rounded-full bg-rose-400/25 blur-3xl mix-blend-multiply"
-            initial={{ x: 60, y: 120, scale: 1 }}
-            animate={{
-              x: [60, -60, 100, 60],
-              y: [120, 40, 160, 120],
-              scale: [1, 0.94, 1.12, 1],
-            }}
-            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+            style={{ x: blob2X, y: blob2Y }}
           />
           <motion.div
             aria-hidden
             className="absolute top-1/3 left-1/2 h-[45vmax] w-[45vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-400/25 blur-3xl mix-blend-multiply"
-            initial={{ rotate: 0, scale: 1 }}
-            animate={{ rotate: [0, 45, -30, 0], scale: [1, 1.06, 0.97, 1] }}
-            transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
+            style={{ x: blob3X, y: blob3Y }}
           />
           {/* Additional smaller floaters for more motion */}
           <motion.div
             aria-hidden
             className="absolute top-10 right-1/3 h-[28vmax] w-[28vmax] rounded-full bg-amber-300/25 blur-3xl mix-blend-multiply"
-            initial={{ x: 40, y: -20, scale: 1 }}
-            animate={{
-              x: [40, -30, 60, 0, 40],
-              y: [-20, 30, -10, 50, -20],
-              scale: [1, 1.04, 0.98, 1.06, 1],
-            }}
-            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+            style={{ x: floater1X, y: floater1Y }}
           />
           <motion.div
             aria-hidden
             className="absolute bottom-1/4 left-1/4 h-[22vmax] w-[22vmax] rounded-full bg-teal-300/25 blur-2xl mix-blend-multiply"
-            initial={{ x: -20, y: 20, rotate: 0 }}
-            animate={{
-              x: [-20, 50, -40, 30, -20],
-              y: [20, -30, 40, -10, 20],
-              rotate: [0, 20, -15, 10, 0],
-            }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+            style={{ x: floater2X, y: floater2Y }}
           />
         </>
       )}

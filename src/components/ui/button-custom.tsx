@@ -44,6 +44,7 @@ const buttonVariants = cva(base, {
       size: "cta",
       className: "h-9 px-8 w-auto min-w-[14rem]",
     },
+    { variant: "secondary", size: "default", className: "h-10 px-4" },
     { variant: "secondary", size: "sm", className: "h-8 px-3 py-1.5 " },
     { variant: "secondary", size: "lg", className: "h-12 px-8 " },
   ],

@@ -45,7 +45,7 @@ export default function RootLayout({
         <AosProvider />
         <main
           id="content"
-          className="flex min-h-screen  flex-col items-start justify-center whitespace-pre-wrap"
+          className="flex min-h-screen px-10 flex-col items-start justify-center whitespace-pre-wrap"
         >
           {children}
         </main>
