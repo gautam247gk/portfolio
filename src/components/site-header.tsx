@@ -74,21 +74,21 @@ export function SiteHeader() {
         scrolled ? "bg-opacity-90 backdrop-blur-md" : "bg-transparent"
       } }`}
     >
-      <div className="container max-w-7xl px-4 md:px-6">
-        <div className="grid w-full grid-cols-2 items-center justify-between py-3 md:grid-cols-3">
+      <div className="container max-w-7xl ">
+        <div className="grid w-full grid-cols-2 items-center justify-center py-3 md:grid-cols-[1fr_2fr_0.5fr] ">
           <Link href="/" className="flex items-center justify-start gap-2">
             <h2 className="text-2xl font-bold">&lt;Gautam Krishnan&#47;&gt;</h2>
             <span className="sr-only">Gautam Krishnan</span>
           </Link>
 
-          <nav className="hidden w-full items-center justify-center gap-6 px-6 text-md font-medium md:flex">
+          <nav className="hidden w-full items-center justify-around align-baseline text-md font-medium md:flex-row md:flex">
             {nav.map((item) => {
               return (
                 <a
                   key={item.id}
                   href={"#" + item.id}
                   onClick={(e) => handleHashScroll(e, item.id)}
-                  className="text-primary-foreground  dark:text-secondary-foreground"
+                  className="text-primary-foreground text-center w-full dark:text-secondary-foreground"
                 >
                   {item.label}
                 </a>
