@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { Logo } from "./ui/logo";
 import { Button } from "./ui/button-custom";
 import { Menu as MenuIcon } from "lucide-react";
 import { Sheet, SheetTrigger, SheetContent, SheetClose } from "./ui/sheet";
@@ -117,11 +116,6 @@ export function SiteHeader() {
                   </button>
                 </SheetTrigger>
                 <SheetContent side="right">
-                  <div className="flex items-center justify-between px-4 py-3">
-                    <Link href="/" className="inline-flex items-center">
-                      <Logo />
-                    </Link>
-                  </div>
                   <div className="px-4 py-2 flex flex-col gap-3">
                     {nav.map((item) => {
                       return (
