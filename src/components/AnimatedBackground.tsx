@@ -42,17 +42,22 @@ export default function AnimatedBackground() {
   const floater1Y = useTransform(smy, [-1, 1], [-18, 18]);
   const floater2X = useTransform(smx, [-1, 1], [-20, 20]);
   const floater2Y = useTransform(smy, [-1, 1], [16, -16]);
+  // Very subtle parallax for the grid itself
+  const gridX = useTransform(smx, [-1, 1], [12, -12]);
+  const gridY = useTransform(smy, [-1, 1], [8, -8]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Soft vertical base gradient (updated palette) */}
       <div className="absolute inset-0 bg-gradient-to-b from-violet-50 via-white to-emerald-50" />
 
-      {/* Subtle grid with a vignette fade (static) */}
+      {/* Subtle grid with a vignette fade (now with gentle parallax) */}
       <motion.div
         aria-hidden
         className="absolute inset-0 bg-grid opacity-50"
         style={{
+          x: !reduce ? gridX : 0,
+          y: !reduce ? gridY : 0,
           WebkitMaskImage:
             "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 40%, transparent 70%)",
           maskImage:
@@ -74,7 +79,7 @@ export default function AnimatedBackground() {
           }}
           initial={{ rotate: 0 }}
           animate={{ rotate: 360 }}
-          transition={{ duration: 160, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
         />
       )}
 

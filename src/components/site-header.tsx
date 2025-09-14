@@ -87,7 +87,7 @@ export function SiteHeader() {
                   key={item.id}
                   href={"#" + item.id}
                   onClick={(e) => handleHashScroll(e, item.id)}
-                  className="text-primary-foreground text-center w-full dark:text-secondary-foreground"
+                  className="text-black text-center w-full dark:text-secondary-foreground"
                 >
                   {item.label}
                 </a>
@@ -97,12 +97,13 @@ export function SiteHeader() {
 
           <div className="flex items-center justify-end gap-4">
             <div className="hidden items-center gap-2 text-sm font-medium md:flex">
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-secondary bg-background text-foreground hover:bg-secondary/50 hover:text-secondary-foreground h-10 px-4 py-2 min-w-[81px]"
+              <Button
+                asChild
+                size="sm"
+                className="rounded-full border-white border"
               >
-                Resume
-              </Link>
+                <a href="#resume">Resume</a>
+              </Button>
             </div>
 
             <div className="md:hidden">
@@ -131,11 +132,8 @@ export function SiteHeader() {
                       );
                     })}
                     <div className="mt-4 flex flex-col gap-2">
-                      <Button
-                        variant="secondary"
-                        className="bg-white py-2 rounded-full"
-                      >
-                        <a href="/login">Resume</a>
+                      <Button asChild size="sm" className="rounded-full">
+                        <a href="#resume">Resume</a>
                       </Button>
                     </div>
                   </div>

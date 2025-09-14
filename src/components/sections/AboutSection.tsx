@@ -32,22 +32,22 @@ export default function AboutSection() {
               data-aos="zoom-in"
               data-aos-delay="50"
             >
-              <span className="rounded-full border px-3 py-1 text-xs">
+              <span className="rounded-full border border-primary px-3 py-1 text-xs">
                 TypeScript
               </span>
-              <span className="rounded-full border px-3 py-1 text-xs">
+              <span className="rounded-full border border-primary px-3 py-1 text-xs">
                 Next.js
               </span>
-              <span className="rounded-full border px-3 py-1 text-xs">
+              <span className="rounded-full border border-primary px-3 py-1 text-xs">
                 Node.js
               </span>
-              <span className="rounded-full border px-3 py-1 text-xs">
+              <span className="rounded-full border border-primary px-3 py-1 text-xs">
                 PostgreSQL
               </span>
-              <span className="rounded-full border px-3 py-1 text-xs">
+              <span className="rounded-full border border-primary px-3 py-1 text-xs">
                 Cloud
               </span>
-              <span className="rounded-full border px-3 py-1 text-xs">
+              <span className="rounded-full border border-primary px-3 py-1 text-xs">
                 Design Systems
               </span>
             </div>
